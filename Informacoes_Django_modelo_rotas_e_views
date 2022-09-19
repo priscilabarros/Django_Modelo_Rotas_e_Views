@@ -1,0 +1,13 @@
+Acessar a venv pelo Pycharm:
+
+* Configurações de ambiente:
+- utilizar um editor de código como pycharm ou visual code ou etc
+
+- Criar uma venv: digitar o comando: python3 -m venv ./venv
+
+- Instalar o Django: pip install Django==2.2.6
+
+- Instalar o python
+OBS: o comando "python3 --version" retorna a versão instalada do python
+
+
