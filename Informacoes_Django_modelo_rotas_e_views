@@ -1,6 +1,30 @@
+Servidor e app de receita - iniciar
+
+* Comandos que o Manage.py pode fazer:
+    - python manage.py help [ abre uma janela de ajuda do Manage.py ]
+    - python manage.py runserver [ sobe o servidor ]
+
+* Como alterar a linguagem do seu projeto:
+Acesse o arquivo settings.py e defina a configuração " LANGUAGE_CODE = 'pt-br' "
+
+* Como alterar o time zone do seu projeto:
+Acesse o arquivo settings.py e defina a configuração " TIME_ZONE = 'America/Sao_Paulo' "
+
+* Arquivos dentro da pasta de um projeto:
+- __init.py__ : indica que o diretorio deve ser considerado um pacote.
+- settings.py : arquivo de configurações relacionados ao projeto.
+- urls.py: declaração de todas urls para o projeto
+- wsgi.py: ponto de integração de servidores web
+
+* Comandos que o Django pode fazer:
+    - django-admin help [ abre uma janela de ajuda do Django ]
+    - django-admin startproject "nome_do_projeto" . [ inicia um projeto no django, se houver este ponto final no comando indica que só será criada uma pasta com o nome do projeto e as demais subpastas já serão do framework, se o comando for sem o . então será criada uma subpasta de introdução. ]
+
 Acessar a venv pelo Pycharm:
 
 * Configurações de ambiente:
+- Comando "pip freeze" mostra todos os modulos instalados no ambiente virtual
+
 - utilizar um editor de código como pycharm ou visual code ou etc
 
 - Criar uma venv: digitar o comando: python3 -m venv ./venv
