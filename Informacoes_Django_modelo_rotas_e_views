@@ -1,4 +1,40 @@
-Servidor e app de receita - iniciar
+* Criar uma rota para um app - na pasta principal vá ate urls e inclua o path. Exemplo:
+
+from django.urls import path, include
+
+urlpatterns = [
+    path('',include('receitas.urls')),
+]
+
+* Criar uma view em um app - vai no arquivo de views dentro do app  e crie um arquivo. Exemplo:
+
+from django.http import HttpResponse
+
+def index(request):
+    return HttpResponse('<h1>Receitas</h1>')
+
+* Criar uma url para um app - Crie um novo file dentrode sua app com o nome url.py, neste novo arquivo importe as urls e views do Django. Exemplo:
+
+from django.urls import path
+
+from . import views
+
+urlpatterns = [
+    path('',views.index,name='index')
+]
+
+OBS: primeiro parametro é a rota, segundo é a view e terceiro é o name space do app para essas entradas urls.
+
+* Registrar um app - no arquivo apps.py deve existir uma classe configs possui o name da app que sera utilizado no registro. Em Settings.py dentro da pasta principal do projeto, verifique o trecho INSTALLED_APPS e atribua a nova app. Exemplo:
+
+INSTALLED_APPS = [
+    'receitas',
+
+
+* Criar um app - python manage.py startapp "nome _do_app"
+Exemplo: python manage.py startapp receitas
+
+* App - uma aplicação que tem umadeterminada ação. Exemplo mostrar receitas em um sites.
 
 * Comandos que o Manage.py pode fazer:
     - python manage.py help [ abre uma janela de ajuda do Manage.py ]
