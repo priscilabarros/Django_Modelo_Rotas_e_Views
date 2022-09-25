@@ -1,3 +1,28 @@
+Erro no static 04:07
+
+* Referenciar os arquivos estaticos - vá até a pasta principal do projeto em settings.py na area de Static files. Exemplo:
+
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
+STATIC_URL = '/statis/'
+STATICFILES_DIR = [os.path.join(BASE_DIR,'alurareceita/static')]
+
+* Associar uma app a um template - na pasta principal vá ate settings.py, na area de templates adicione sua app. Exemplo:
+
+TEMPLATES = [
+...
+    'DIRS': [os.path.join(BASE_DIR,'receitas/templates')],
+]
+
+* Arquivos estaticos -  no django esses arquivos são as imagens, arquivos CSS, Javascript e etc.
+
+* Criar um requisição para uma página html - vá na parte de views da sua app e faça uma requisição para sua página html. 
+Exemplo:
+from django.shortcuts import render 
+
+def index(request):
+    return render(request,'index.html')
+
+
 * Criar uma rota para um app - na pasta principal vá ate urls e inclua o path. Exemplo:
 
 from django.urls import path, include
@@ -34,7 +59,7 @@ INSTALLED_APPS = [
 * Criar um app - python manage.py startapp "nome _do_app"
 Exemplo: python manage.py startapp receitas
 
-* App - uma aplicação que tem umadeterminada ação. Exemplo mostrar receitas em um sites.
+* App - uma aplicação que tem uma determinada ação. Exemplo mostrar receitas em um sites.
 
 * Comandos que o Manage.py pode fazer:
     - python manage.py help [ abre uma janela de ajuda do Manage.py ]
