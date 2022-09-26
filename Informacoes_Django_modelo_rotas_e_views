@@ -1,4 +1,4 @@
-Erro no static 04:07
+* informar arquivos staticos - para informar ao django arquivos staticos, comando: python manage.py collectstatic
 
 * Referenciar os arquivos estaticos - vá até a pasta principal do projeto em settings.py na area de Static files. Exemplo:
 
