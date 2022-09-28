@@ -1,4 +1,20 @@
+* Estender um html - criar uma pasta dentro de templates chamado base.html copiar para o base todo codigo html de index e receita html.
+em base.html copie as partes em comum do index e receita, adicionando no inicio da pagina:
+{% load static %}
+
+e em receita e indice html remova as partes em comum adicionando no inicio da pagina:
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+e no final da pagina:
+{% endblock %}
+
 * informar arquivos staticos - para informar ao django arquivos staticos, comando: python manage.py collectstatic
+
+add o código em python com "{% função 'XXXXX' %}'"
+Exemplo:
+antes: "index.html" depois: "{% url 'index' %}"
 
 * Referenciar os arquivos estaticos - vá até a pasta principal do projeto em settings.py na area de Static files. Exemplo:
 
@@ -21,7 +37,9 @@ from django.shortcuts import render
 
 def index(request):
     return render(request,'index.html')
-
+    
+def receita(request):
+    return render(request,'receita.html')
 
 * Criar uma rota para um app - na pasta principal vá ate urls e inclua o path. Exemplo:
 
@@ -29,6 +47,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('',include('receitas.urls')),
+    path('receita',views.receita,name='receita'),
 ]
 
 * Criar uma view em um app - vai no arquivo de views dentro do app  e crie um arquivo. Exemplo:
