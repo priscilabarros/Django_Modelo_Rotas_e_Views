@@ -1,3 +1,31 @@
+* Para passar dados para o template - quando se deseja passar mais de uma informação.Cria-se um dicionario:
+
+def index(request):
+    
+    receitas = {
+        1:'Lasanha',
+        2:'Sopa de legumes',
+        3:'Sorvete'
+    }    
+
+    dados = {
+        'nome_das_receitas':receitas
+    }
+    return render(request,'index.html',dados)
+
+E na parte de index temos que adequar a estrutura para garantir que serão criadas receitas dinamicamente. Exemplo:
+
+{% for chave, valor in nome_das_receitas.items %}
+
+* Passar informações para o template - no arquivo de views passe um contexto para o template . Exemplo:
+
+def index(request):
+    return render(request,'index.html',{'nome_da_receita':'Sorvete'})
+
+e na parte de templates no index.html é posto não o código em python mas um retorno de exibição em python . Exemplo:
+
+<h5>{{nome_da_receita }}</h5>
+
 * Partial - são pequenos trechos de Html que podem ser compartilhados entre páginas. Dentro da pasta templates na app crie uma nova pasta chamada partials, dentro de partials crie files html dos itens que você queira dar manutenção por exemplo menu.html.
 
 No código principal remova do codigo a parte de menu e adicione o codigo removido no arquivo menu.html e no index.html insira:
