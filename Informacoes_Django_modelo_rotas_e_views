@@ -1,3 +1,11 @@
+* Partial - são pequenos trechos de Html que podem ser compartilhados entre páginas. Dentro da pasta templates na app crie uma nova pasta chamada partials, dentro de partials crie files html dos itens que você queira dar manutenção por exemplo menu.html.
+
+No código principal remova do codigo a parte de menu e adicione o codigo removido no arquivo menu.html e no index.html insira:
+ {% include 'partials/menu.html'%}
+
+para direcionar o codigo que deve ser usado no menu.html. E no menu.html insira os arquivos staticos no inicio da pagina:
+{% load static %}
+
 * Estender um html - criar uma pasta dentro de templates chamado base.html copiar para o base todo codigo html de index e receita html.
 em base.html copie as partes em comum do index e receita, adicionando no inicio da pagina:
 {% load static %}
