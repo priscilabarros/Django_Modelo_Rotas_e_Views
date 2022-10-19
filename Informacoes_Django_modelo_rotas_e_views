@@ -1,3 +1,4 @@
+*
 * Para passar dados para o template - quando se deseja passar mais de uma informação.Cria-se um dicionario:
 
 def index(request):
