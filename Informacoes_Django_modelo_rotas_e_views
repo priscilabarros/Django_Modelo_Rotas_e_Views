@@ -1,4 +1,22 @@
-*
+* * Comandos Postgres:
+Verificar se o status do postgresql:
+service postgresql status
+
+Para logar no postgresql pelo terminal:
+sudo -u postgres psql
+
+Para logar no postgres pelo terminal:
+psql -U postgres 
+password: postgres
+
+Para listar os bancos de dados do postgres:
+\l
+
+Para listar todas as tabelas do banco
+\dt
+
+Para se conectar em um outro banco de dados:
+\c
 * Para passar dados para o template - quando se deseja passar mais de uma informação.Cria-se um dicionario:
 
 def index(request):
