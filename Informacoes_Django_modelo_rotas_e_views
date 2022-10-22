@@ -1,4 +1,6 @@
-* * Comandos Postgres:
+* PGadmin: ferramenta que mostra uma interface grafica do postgresql 
+
+* Comandos Postgres:
 Verificar se o status do postgresql:
 service postgresql status
 
