@@ -1,4 +1,61 @@
+* Comandos no PGadmin:
+
+- Para logar:
+# É necessário ativar a virtual env:
+source pgadmin4/bin/activate
+
+# após a ativação roda o comando:
+pgadmin4
+
+# o processo irá iniciar, então deve ser acessado o link no browser: http://localhost:5050/browser/
+
+---------------------------------------------------------------
+* Erro PGadmin: "O pacote 'pgadmin4' não tem candidato para instalação"
+
+Este erro é mostrado em alguns sistemas linux, principalmente no mint por isso é necessário seguir os seguintes passos para a correção e possível instalação:
+
+#primeiro é necessário saber informações de qual mint esta sendo utilizado por isso o comando em um terminal:
+ cat /etc/os-release
+
+#Foi usado as dicas do blog https://startdb.com.br/2021/05/02/instalando-pgadmin4-no-linux/
+para correção do problema:
+
+sudo apt update
+sudo apt install curl
+
+# Instalando chaves:
+sudo curl https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo apt-key add
+
+#Configurar repositorios:
+sudo sh -c 'echo "deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list && apt update'
+
+#no linux mint 20.01
+edite o arquivo /etc/apt/sources.list.d/pgadmin4.list, voce vai encontrar a linha:
+deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/ulyssa pgadmin4 main
+
+substitua por esta linha (ou so troque ulyssa por focal):
+deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/focal pgadmin4 main
+
+
+#Instalar PgAdmin4 Web e Desktop
+sudo apt install pgadmin4:
+
+#Instalar somente desktop:
+sudo apt install pgadmin4-desktop
+
+#instalar web
+sudo apt install pgadmin4-web 
+
+#Configurar Webserver
+sudo /usr/pgadmin4/bin/setup-web.sh
+
+---------------------------------------------------------------
+
 * PGadmin: ferramenta que mostra uma interface grafica do postgresql 
+
+- No entanto apareceu um novo erro de dependencia pois este linux é antigo. Foi necessário instalar o PGAdmin via pip.
+
+---------------------------------------------------------------
 
 * Comandos Postgres:
 Verificar se o status do postgresql:
@@ -19,6 +76,9 @@ Para listar todas as tabelas do banco
 
 Para se conectar em um outro banco de dados:
 \c
+
+---------------------------------------------------------------
+
 * Para passar dados para o template - quando se deseja passar mais de uma informação.Cria-se um dicionario:
 
 def index(request):
@@ -38,6 +98,8 @@ E na parte de index temos que adequar a estrutura para garantir que serão criad
 
 {% for chave, valor in nome_das_receitas.items %}
 
+---------------------------------------------------------------
+
 * Passar informações para o template - no arquivo de views passe um contexto para o template . Exemplo:
 
 def index(request):
@@ -47,6 +109,8 @@ e na parte de templates no index.html é posto não o código em python mas um r
 
 <h5>{{nome_da_receita }}</h5>
 
+---------------------------------------------------------------
+
 * Partial - são pequenos trechos de Html que podem ser compartilhados entre páginas. Dentro da pasta templates na app crie uma nova pasta chamada partials, dentro de partials crie files html dos itens que você queira dar manutenção por exemplo menu.html.
 
 No código principal remova do codigo a parte de menu e adicione o codigo removido no arquivo menu.html e no index.html insira:
@@ -54,6 +118,8 @@ No código principal remova do codigo a parte de menu e adicione o codigo removi
 
 para direcionar o codigo que deve ser usado no menu.html. E no menu.html insira os arquivos staticos no inicio da pagina:
 {% load static %}
+
+---------------------------------------------------------------
 
 * Estender um html - criar uma pasta dentro de templates chamado base.html copiar para o base todo codigo html de index e receita html.
 em base.html copie as partes em comum do index e receita, adicionando no inicio da pagina:
@@ -67,17 +133,23 @@ e em receita e indice html remova as partes em comum adicionando no inicio da pa
 e no final da pagina:
 {% endblock %}
 
+---------------------------------------------------------------
+
 * informar arquivos staticos - para informar ao django arquivos staticos, comando: python manage.py collectstatic
 
 add o código em python com "{% função 'XXXXX' %}'"
 Exemplo:
 antes: "index.html" depois: "{% url 'index' %}"
 
+---------------------------------------------------------------
+
 * Referenciar os arquivos estaticos - vá até a pasta principal do projeto em settings.py na area de Static files. Exemplo:
 
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 STATIC_URL = '/statis/'
 STATICFILES_DIR = [os.path.join(BASE_DIR,'alurareceita/static')]
+
+---------------------------------------------------------------
 
 * Associar uma app a um template - na pasta principal vá ate settings.py, na area de templates adicione sua app. Exemplo:
 
@@ -86,7 +158,11 @@ TEMPLATES = [
     'DIRS': [os.path.join(BASE_DIR,'receitas/templates')],
 ]
 
+---------------------------------------------------------------
+
 * Arquivos estaticos -  no django esses arquivos são as imagens, arquivos CSS, Javascript e etc.
+
+---------------------------------------------------------------
 
 * Criar um requisição para uma página html - vá na parte de views da sua app e faça uma requisição para sua página html. 
 Exemplo:
@@ -98,6 +174,8 @@ def index(request):
 def receita(request):
     return render(request,'receita.html')
 
+---------------------------------------------------------------
+
 * Criar uma rota para um app - na pasta principal vá ate urls e inclua o path. Exemplo:
 
 from django.urls import path, include
@@ -107,12 +185,16 @@ urlpatterns = [
     path('receita',views.receita,name='receita'),
 ]
 
+---------------------------------------------------------------
+
 * Criar uma view em um app - vai no arquivo de views dentro do app  e crie um arquivo. Exemplo:
 
 from django.http import HttpResponse
 
 def index(request):
     return HttpResponse('<h1>Receitas</h1>')
+
+---------------------------------------------------------------
 
 * Criar uma url para um app - Crie um novo file dentrode sua app com o nome url.py, neste novo arquivo importe as urls e views do Django. Exemplo:
 
@@ -126,26 +208,39 @@ urlpatterns = [
 
 OBS: primeiro parametro é a rota, segundo é a view e terceiro é o name space do app para essas entradas urls.
 
+---------------------------------------------------------------
+
 * Registrar um app - no arquivo apps.py deve existir uma classe configs possui o name da app que sera utilizado no registro. Em Settings.py dentro da pasta principal do projeto, verifique o trecho INSTALLED_APPS e atribua a nova app. Exemplo:
 
 INSTALLED_APPS = [
     'receitas',
 
+---------------------------------------------------------------
 
 * Criar um app - python manage.py startapp "nome _do_app"
 Exemplo: python manage.py startapp receitas
 
+---------------------------------------------------------------
+
 * App - uma aplicação que tem uma determinada ação. Exemplo mostrar receitas em um sites.
+
+---------------------------------------------------------------
 
 * Comandos que o Manage.py pode fazer:
     - python manage.py help [ abre uma janela de ajuda do Manage.py ]
     - python manage.py runserver [ sobe o servidor ]
 
+---------------------------------------------------------------
+
 * Como alterar a linguagem do seu projeto:
 Acesse o arquivo settings.py e defina a configuração " LANGUAGE_CODE = 'pt-br' "
 
+---------------------------------------------------------------
+
 * Como alterar o time zone do seu projeto:
 Acesse o arquivo settings.py e defina a configuração " TIME_ZONE = 'America/Sao_Paulo' "
+
+---------------------------------------------------------------
 
 * Arquivos dentro da pasta de um projeto:
 - __init.py__ : indica que o diretorio deve ser considerado um pacote.
@@ -153,11 +248,15 @@ Acesse o arquivo settings.py e defina a configuração " TIME_ZONE = 'America/Sa
 - urls.py: declaração de todas urls para o projeto
 - wsgi.py: ponto de integração de servidores web
 
+---------------------------------------------------------------
+
 * Comandos que o Django pode fazer:
     - django-admin help [ abre uma janela de ajuda do Django ]
     - django-admin startproject "nome_do_projeto" . [ inicia um projeto no django, se houver este ponto final no comando indica que só será criada uma pasta com o nome do projeto e as demais subpastas já serão do framework, se o comando for sem o . então será criada uma subpasta de introdução. ]
 
 Acessar a venv pelo Pycharm:
+
+---------------------------------------------------------------
 
 * Configurações de ambiente:
 - Comando "pip freeze" mostra todos os modulos instalados no ambiente virtual
