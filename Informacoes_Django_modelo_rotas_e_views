@@ -1,3 +1,71 @@
+Alura Exibindo dados dos bancos - 07:01
+
+* Como adicionar uma model e uma view a um template:
+
+- Vá em receitas -> templates -> index.html
+
+- Código exemplo:
+<!-- ##### Best Receipe Area Start ##### -->
+    .
+     .  
+      .      
+                {% if receitas %}
+                {% for receita in receitas %}
+                <!-- Single Best Receipe Area -->
+               .
+                   . 
+                        .
+                       .
+                              <h5>{{receita.nome_receita}}</h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                {% endif %}
+
+
+
+* Como adicionar uma model a uma view:
+
+- Vá em receitas -> views.py
+
+- Código exemplo:
+from .models import Receita
+
+def index(request):
+    receitas = Receita.objects.all()
+
+    dados = {
+        'receitas' : receitas
+    }
+
+* Como criar um admin no Django:
+
+- No terminal digite o comando: 
+python manage.py createsuperuser
+
+- o python pedirá o nome do super usuario:
+digite no terminal o nome, ex: priscila
+
+- o python pedirá o email do super usuario:
+digite no terminal o email, ex: priscila.saldanha.barros@gmail.com
+
+- o python pedirá a senha do super usuario:
+digite no terminal a senha, ex:123456
+
+* Crude Django:
+
+- dentro da pasta receitas o arquivo admin.py serve de registros de seus modelos.
+
+- Exemplo:
+from django.contrib import admin
+from .models import Receita
+
+admin.site.register(Receita)
+
+
 * Visualizando a nova tabela gerada no pgadmin:
 
 - Acesse ao pgadmin vá em : dbserver -> Databases -> alura_receita -> Schemas -> public -> Tables 
