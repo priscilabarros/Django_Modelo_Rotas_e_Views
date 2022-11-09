@@ -1,3 +1,10 @@
+* Visualizando a nova tabela gerada no pgadmin:
+
+- Acesse ao pgadmin vá em : dbserver -> Databases -> alura_receita -> Schemas -> public -> Tables 
+- Clique com o botão direito em Refresh;
+- Verifique a ultima tabela receitas_receita clique com o botão direito
+- Selecione a opção View/Edit -> Data -> All Rows todas as linhas presentes na tabela são exibidas.
+
 * Criando um modelo no django:
 
 - Vá ate a pasta de modelos de sua app em receitas -> models.py
@@ -17,6 +24,9 @@ class Receita(models.Model):
 
 - No terminal digite o comando para gerar a tabela do modelo no pgadmin:
 python manage.py makemigrations 
+
+- Ainda no terminal digite o comando para migrar o modelo que criamos:
+python manage.py migrate
 
 * Adicionar estrutura do BD no Django:
 
