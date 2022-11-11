@@ -1,5 +1,61 @@
-Alura Exibindo dados dos bancos - 07:01
+* Como adicionar um link com o banco de dados
 
+em index.html vá até a url e troque por o codigo em python que encaminha para receita que é a tabela no banco.
+
+Ex:
+antes : <a href="receita.html">
+depois: <a href="{% url 'receita' receita.id %}">
+
+no arquivo url.py
+antes : path('receita', views.receita, name='receita'),
+depois: path('<int:receita_id>', views.receita, name='receita'),
+
+no arquivo views.py
+antes : def receita(request):
+            return render(request,'receita.html')
+depois: def receita(request, receita_id):
+            return render(request,'receita.html')
+
+no arquivo receita->partials->menu.html
+retira a linha a baixo: 
+                       <li><a href="{% url 'receita' %}">Receitas</a></li>
+
+no arquivo views.py adiciona o seguinte código:
+from django.shortcuts import render, get_list_or_404, get_object_or_404
+
+def receita(request, receita_id):
+    receita = get_object_or_404(Receita, pk=receita_id)
+
+    receita_a_exibir = {
+        'receita' : receita
+    }
+
+    return render(request,'receita.html',receita_a_exibir)
+
+na pagina de receita.html
+
+antes: 
+<h2>Nome da receita</h2>
+<span>30.jun.2021</span>
+<h6>Preparo: 15 minutos</h6>
+<h6>Rendimento: 2 porções</h6>
+<h6>Categoria: categoria</h6>
+<h6>Por: Pessoa</h6>
+
+<p>lorem ipsu...</p>
+<p>lorem ipsu...</p>
+
+depois:
+<h2>{{receita.nome_receita}}</h2>
+<span>{{receita.data_receita}}</span>
+<h6>Preparo: {{receita.tempo_preparo}} minutos</h6>
+<h6>Rendimento: {{receita.rendimento}}</h6>
+<h6>Categoria: {{receita.categoria}}</h6>
+<h6>Por: Pessoa</h6>
+
+<p>{{receita.modo_preparo}}</p>
+<p>{{receita.ingredientes}}</p>
+------------------------------------------------------------------------------
 * Como adicionar uma model e uma view a um template:
 
 - Vá em receitas -> templates -> index.html
