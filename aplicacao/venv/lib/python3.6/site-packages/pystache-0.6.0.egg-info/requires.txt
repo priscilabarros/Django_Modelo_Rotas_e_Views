@@ -1,0 +1,7 @@
+
+[cov]
+coverage
+coverage_python_version
+
+[test]
+nose
