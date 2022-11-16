@@ -1,3 +1,30 @@
+
+* Deixaro nome da receita como um link no admin:
+
+- Vá em Receitas -> admin.py
+
+- Add:
+
+    list_display_links = ('id','nome_receita', 'categoria')
+
+admin.site.register(Receita,ListandoReceitas)
+
+
+* Editar a tela do admin no django:
+
+- Vá em Receitas -> admin.py
+
+- Crie uma classe de edição:
+
+class ListandoReceitas( admin.ModelAdmin):
+    list_display = ('id','nome_receita', 'categoria')
+
+admin.site.register(Receita,ListandoReceitas)
+
+
+Curso Integração de Modelos no Django: filtros, buscas e admin:
+===============================================================
+
 * Como adicionar um link com o banco de dados
 
 em index.html vá até a url e troque por o codigo em python que encaminha para receita que é a tabela no banco.
